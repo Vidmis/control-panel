@@ -1,20 +1,24 @@
 import { useState } from 'react';
-import { useGetUsersQuery } from '../features/api';
-import AssingModal from './AssignModal';
 
 const CategoriesForm = () => {
   const initialValues = {
-    id: 1,
-    firstName: '',
-    secondName: '',
-    email: '',
-    password: '',
-    confPassword: '',
-    age: '',
-    gender: '',
-    categories: [
-      ['1', '1_1'],
-      ['2', '2_1'],
+    id: '1',
+    name: 'Sports',
+    sub_categories: [
+      {
+        id: '1_1',
+        name: 'Cycling',
+        sub_categories: [
+          {
+            id: '1_1_1',
+            name: 'Road cycling',
+          },
+          {
+            id: '1_1_2',
+            name: 'MTB cycling',
+          },
+        ],
+      },
     ],
   };
 
