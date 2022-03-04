@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-style {
+  @apply transition duration-300 ease-in-out rounded-md font-medium text-zinc-400 text-left w-72 m-2 p-2 border focus:outline-none border-zinc-400 focus:border-blue-500 focus:text-blue-500;
+}

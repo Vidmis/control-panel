@@ -5,11 +5,10 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/' }),
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: (userId) => `users/${userId}`,
+      query: () => 'users',
     }),
     getCategories: builder.query({
       query: () => `categories`,
-      //   query: (categoryName) => `categories/${categoryName}`,
     }),
     createCategory: builder.mutation({
       query: (user) => ({

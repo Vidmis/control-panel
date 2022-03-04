@@ -2,212 +2,58 @@
   "users": [
     {
       "id": 1,
-      "fullName": "Luigi Luis",
-      "email": "luigi@gmail.com",
-      "password": "test123",
-      "age": 25,
-      "gender": "male",
-      "category": "sports",
-      "subCategory": "cycling",
-      "subSubCategory": "road cycling"
+      "name": "Luigi",
+      "categories": [
+        ["1", "1_1"],
+        ["2", "2_1"]
+      ]
     },
     {
       "id": 2,
-      "fullName": "Maria Super",
-      "email": "maria@gmail.com",
-      "password": "test123",
-      "age": 29,
-      "gender": "female",
-      "category": "sports",
-      "subCategory": "cycling",
-      "subSubCategory": "road cycling"
-    },
-    {
-      "fullName": "Vidmis random",
-      "secName": "liugy",
-      "id": 3
-    },
-    {
-      "fullName": "Vidmis random",
-      "secName": "liugy",
-      "id": 4
-    },
-    {
-      "fullName": "Vidmis random",
-      "secName": "liugy",
-      "id": 5
+      "name": "Mario",
+      "categories": [["1", "1_1", "1_1_1"], ["2"]]
     }
   ],
   "categories": [
     {
-      "id": 1,
-      "categoryName": "Sports",
-      "subCategories": [
+      "id": "1",
+      "name": "Sports",
+      "sub_categories": [
         {
-          "id": 1,
-          "subCategoryName": "Cycling",
-          "subSubCategories": [
+          "id": "1_1",
+          "name": "Cycling",
+          "sub_categories": [
             {
-              "id": 1,
-              "subSubCategoryName": "Road cycling"
+              "id": "1_1_1",
+              "name": "Road cycling"
             },
             {
-              "id": 2,
-              "subSubCategoryName": "MTB cycling"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subCategoryName": "football",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "outside football"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "indoor football"
+              "id": "1_1_2",
+              "name": "MTB cycling"
             }
           ]
         }
       ]
     },
     {
-      "id": 2,
-      "categoryName": "Media",
-      "subCategories": [
+      "id": "2",
+      "name": "Home",
+      "sub_categories": [
         {
-          "id": 1,
-          "subCategoryName": "Photography",
-          "subSubCategories": [
+          "id": "2_1",
+          "name": "Kitchen",
+          "sub_categories": [
             {
-              "id": 1,
-              "subSubCategoryName": "events"
+              "id": "2_1_1",
+              "name": "Puodai"
             },
             {
-              "id": 2,
-              "subSubCategoryName": "personal"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subCategoryName": "Videography",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "Events"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "personal"
+              "id": "2_1_2",
+              "name": "Knifes"
             }
           ]
         }
       ]
-    },
-    {
-      "id": 3,
-      "categoryName": "Home",
-      "subCategories": [
-        {
-          "id": 1,
-          "subCategoryName": "Kitchen",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "events"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "personal"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subCategoryName": "Bathroom",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "Events"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "personal"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "categoryName": "Sprotas",
-      "subCategories": [
-        {
-          "id": 1,
-          "subCategoryName": "runnynynyn",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "fast running"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "slow runnying"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subCategoryName": "basketball",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "outside basketball"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "indoor basketball"
-            }
-          ]
-        }
-      ],
-      "id": 6
-    },
-    {
-      "categoryName": "Sprotas",
-      "subCategories": [
-        {
-          "id": 1,
-          "subCategoryName": "runnynynyn",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "fast running"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "slow runnying"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subCategoryName": "basketball",
-          "subSubCategories": [
-            {
-              "id": 1,
-              "subSubCategoryName": "outside basketball"
-            },
-            {
-              "id": 2,
-              "subSubCategoryName": "indoor basketball"
-            }
-          ]
-        }
-      ],
-      "id": 7
     }
   ]
 }

@@ -2,8 +2,10 @@ import { faFile, faTags, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './App.css';
+import {CATEGORIES_PATH} from './constants/route'
+
 import CategoriesForm from './components/CategoriesForm';
+import CategoriesWithUsers from './components/CategoriesWithUsers'
 import DropDownMenu from './components/DropDownMenu';
 import NavBar from './components/NavBar';
 import NavItem from './components/NavItem';
@@ -24,29 +26,14 @@ function App() {
         <Routes>
           <Route path="/" element={<UserForm />} />
           <Route path="/categoriesForm" element={<CategoriesForm />} />
+          {CATEGORIES_PATH.map((path, index) => {
+            const pathUrl = `/category/:${CATEGORIES_PATH.slice(0, index + 1).join('/:')}`
+            return <Route key={`cat_path_${path}`} path={pathUrl} element={<CategoriesWithUsers />} />
+          })}
         </Routes>
       </Router>
     </div>
   );
 }
 
-{
-  /* <Router>
-<NavBar>
-  <Switch>
-    <Route exact path="/">
-      <NavItem to="/" icon={faUser} />
-    </Route>
-    <Route path="/createCategories">
-      <NavItem to="/createCategories" icon={faTags} />
-    </Route>
-    <Route path="/categories">
-      <NavItem icon={faFile}>
-        <DropDownMenu />
-      </NavItem>
-    </Route>
-  </Switch>
-</NavBar>
-</Router> */
-}
 export default App;
