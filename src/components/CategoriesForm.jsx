@@ -1,36 +1,43 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useCreateCategoryMutation } from '../features/api';
 import Category from './Categories/Category';
+import SubCategory from './Categories/SubCategory';
+import SubSubCateogry from './Categories/SubSubCategory';
+
+const initialValues = {
+  id: '1',
+  name: 'Sports',
+  sub_categories: [
+    {
+      id: '1_1',
+      name: 'Cycling',
+      sub_categories: [
+        {
+          id: '1_1_1',
+          name: 'Road cycling',
+        },
+        {
+          id: '1_1_2',
+          name: 'MTB cycling',
+        },
+      ],
+    },
+  ],
+};
 
 const CategoriesForm = () => {
-  const initialValues = {
-    id: '1',
-    name: 'Sports',
-    sub_categories: [
-      {
-        id: '1_1',
-        name: 'Cycling',
-        sub_categories: [
-          {
-            id: '1_1_1',
-            name: 'Road cycling',
-          },
-          {
-            id: '1_1_2',
-            name: 'MTB cycling',
-          },
-        ],
-      },
-    ],
-  };
-
+  const [openCat, setOpenCat] = useState(false);
+  const [openSub, setOpenSub] = useState(false);
+  const [openSubSub, setOpenSuSub] = useState(false);
+  const [addCategory, addedCategoryResult] = useCreateCategoryMutation();
   const [formValues, setFormValues] = useState(initialValues, (curValues, newValues) => ({
     ...curValues,
     ...newValues,
   }));
 
-  const { category, subCategory, subSubCategory } = formValues;
+  const { catVal, subCatVal, subSubCatVal } = formValues;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +48,26 @@ const CategoriesForm = () => {
   const passValues = (e) => {
     e.preventDefault();
 
-    console.log(formValues);
+    console.log('formValues', formValues);
   };
+
+  const onClickOpenCat = () => {
+    setOpenCat(!openCat);
+    setOpenSub(false);
+    setOpenSuSub(false);
+  };
+  const onClickOpenSub = () => {
+    setOpenCat(false);
+    setOpenSub(!openSub);
+    setOpenSuSub(false);
+  };
+  const onClickOpenSubSub = () => {
+    setOpenCat(false);
+    setOpenSub(false);
+    setOpenSuSub(!openSubSub);
+  };
+
+  console.log('addedCategoryResult', addedCategoryResult);
 
   return (
     <div className="flex flex-row h-fit ">
@@ -56,14 +81,20 @@ const CategoriesForm = () => {
       >
         <h2 className="text-zinc-600 text-xl font-bold my-5 sm:my-10">Create Categories</h2>
         <div className="flex flex-col">
-          <Category category={category} handleChange={handleChange} />
+          <button onClick={onClickOpenCat}>Create Cateogry</button>
+          <button onClick={onClickOpenSub}>Create Sub-category</button>
+          <button onClick={onClickOpenSubSub}>Create Sub-sub-cateogry</button>
+
+          {openCat && <Category catVal={catVal} handleChange={handleChange} />}
+          {openSub && <SubCategory subCatVal={subCatVal} handleChange={handleChange} />}
+          {openSubSub && <SubSubCateogry subSubCatVal={subSubCatVal} handleChange={handleChange} />}
         </div>
 
         <button
-          //   onClick={() => {
-          //     addCategory(randCategory).then(() => categoryData.refetch);
-          //   }}
-          onClick={passValues}
+          onClick={() => {
+            addCategory(formValues).then(() => categoryData.refetch);
+          }}
+          // onClick={passValues}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >
           Submit

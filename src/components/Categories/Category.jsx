@@ -1,7 +1,13 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
+import SubCategory from './SubCategory';
 
-const Category = ({ category, handleChange }) => {
+const Category = ({ catVal, handleChange }) => {
+  const onSubmit = () => {
+    console.log('submited category');
+  };
+
   return (
     <div className="flex justify-center items-center">
       <input
@@ -9,17 +15,10 @@ const Category = ({ category, handleChange }) => {
         type="text"
         placeholder="Category"
         name="category"
-        value={category}
+        value={catVal}
         onChange={handleChange}
+        onSubmit={onSubmit}
       />
-      <div className="inline-grid">
-        <span
-          // onClick={handleAdd}
-          className="inline-grid mb-1 justify-center items-center w-5 h-5 rounded-full bg-zinc-500 text-white"
-        >
-          <FontAwesomeIcon icon={faPlus} />
-        </span>
-      </div>
     </div>
   );
 };

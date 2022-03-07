@@ -1,4 +1,7 @@
-const SubCategory = ({ category, handleChange }) => {
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const SubCategory = ({ subCatVal, handleChange }) => {
   return (
     <div className="flex justify-center items-center">
       <input
@@ -6,20 +9,9 @@ const SubCategory = ({ category, handleChange }) => {
         type="text"
         placeholder="Sub-category"
         name="subCategory"
-        value={category}
+        value={subCatVal}
         onChange={handleChange}
       />
-      <div className="inline-grid">
-        <span
-          // onClick={handleAdd}
-          className="inline-grid mb-1 justify-center items-center w-5 h-5 rounded-full bg-zinc-500 text-white"
-        >
-          <FontAwesomeIcon icon={faPlus} />
-        </span>
-        <span className="inline-grid mb-1 justify-center items-center w-5 h-5 rounded-full bg-zinc-500 text-white">
-          <FontAwesomeIcon icon={faMinus} />
-        </span>
-      </div>
     </div>
   );
 };
