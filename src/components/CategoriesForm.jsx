@@ -1,5 +1,3 @@
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useCreateCategoryMutation } from '../features/api';
 import Category from './Categories/Category';
@@ -81,9 +79,20 @@ const CategoriesForm = () => {
       >
         <h2 className="text-zinc-600 text-xl font-bold my-5 sm:my-10">Create Categories</h2>
         <div className="flex flex-col">
-          <button onClick={onClickOpenCat}>Create Cateogry</button>
-          <button onClick={onClickOpenSub}>Create Sub-category</button>
-          <button onClick={onClickOpenSubSub}>Create Sub-sub-cateogry</button>
+          <div className="flex flex-col items-start">
+            <button className="p-2 mb-2 bg-blue-400 rounded-md text-white" onClick={onClickOpenCat}>
+              Create Cateogry
+            </button>
+            <button className="p-2 mb-2 bg-blue-500 rounded-md text-white" onClick={onClickOpenSub}>
+              Create Sub-category
+            </button>
+            <button
+              className="p-2 mb-2 bg-blue-600 rounded-md text-white"
+              onClick={onClickOpenSubSub}
+            >
+              Create Sub-sub-cateogry
+            </button>
+          </div>
 
           {openCat && <Category catVal={catVal} handleChange={handleChange} />}
           {openSub && <SubCategory subCatVal={subCatVal} handleChange={handleChange} />}
@@ -94,7 +103,6 @@ const CategoriesForm = () => {
           onClick={() => {
             addCategory(formValues).then(() => categoryData.refetch);
           }}
-          // onClick={passValues}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >
           Submit
