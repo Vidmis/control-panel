@@ -33,7 +33,7 @@ const DropDownMenu = () => {
                 {!!sub_categories && (
                   <span
                     onClick={() => onExpandPress(parentID, isExpanded, level)}
-                    className="flex justify-center items-center bg-zinc-500 h-full w-full rounded-full cursor-pointer"
+                    className="flex justify-center items-center bg-sky-900 h-full w-full rounded-full cursor-pointer"
                   >
                     <FontAwesomeIcon icon={isExpanded ? faAngleUp : faAngleDown} />
                   </span>
@@ -52,7 +52,7 @@ const DropDownMenu = () => {
   };
 
   return (
-    <div className="dropdown absolute w-72 right-5 top-14 py-2 pr-4 pl-2 bg-zinc-700 overflow-hidden rounded-md">
+    <div className="dropdown absolute w-72 right-5 top-14 py-2 pr-4 pl-2 bg-sky-700 overflow-hidden shadow-xl shadow-zinc-600 rounded-md">
       {renderCategories(categories)}
     </div>
   );

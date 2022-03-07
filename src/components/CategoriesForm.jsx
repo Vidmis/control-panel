@@ -93,15 +93,14 @@ const CategoriesForm = () => {
               Create Sub-sub-cateogry
             </button>
           </div>
-
-          {openCat && <Category catVal={catVal} handleChange={handleChange} />}
-          {openSub && <SubCategory subCatVal={subCatVal} handleChange={handleChange} />}
-          {openSubSub && <SubSubCateogry subSubCatVal={subSubCatVal} handleChange={handleChange} />}
         </div>
+        {openCat && <Category catVal={catVal} handleChange={handleChange} />}
+        {openSub && <SubCategory subCatVal={subCatVal} handleChange={handleChange} />}
+        {openSubSub && <SubSubCateogry subSubCatVal={subSubCatVal} handleChange={handleChange} />}
 
         <button
           onClick={() => {
-            addCategory(formValues).then(() => categoryData.refetch);
+            addCategory(initialValues).then(() => categoryData.refetch);
           }}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >

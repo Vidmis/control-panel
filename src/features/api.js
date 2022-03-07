@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => 'users',
@@ -10,11 +10,18 @@ export const api = createApi({
     getCategories: builder.query({
       query: () => `categories`,
     }),
-    createCategory: builder.mutation({
+    createUser: builder.mutation({
       query: (user) => ({
-        url: `categories`,
+        url: 'users',
         method: 'POST',
         body: user,
+      }),
+    }),
+    createCategory: builder.mutation({
+      query: (category) => ({
+        url: 'categories',
+        method: 'POST',
+        body: category,
       }),
     }),
     deleteCategory: builder.mutation({
@@ -29,6 +36,7 @@ export const api = createApi({
 export const {
   useGetUsersQuery,
   useGetCategoriesQuery,
+  useCreateUserMutation,
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
 } = api;

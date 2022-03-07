@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useGetUsersQuery } from '../features/api';
+import { useCreateUserMutation, useGetUsersQuery } from '../features/api';
 import AssingModal from './AssignModal';
 
 const UserForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: users, error, isLoading } = useGetUsersQuery(1);
-  // const [addCategory, addedCategoryResult] = useCreateCategoryMutation();
+  // const { data: users, error, isLoading } = useGetUsersQuery(1);
+  const [addUser, addedUserRes] = useCreateUserMutation();
+
+  console.log('addedUserRes', addedUserRes);
 
   const initialValues = {
-    id: 1,
     firstName: '',
     secondName: '',
     email: '',
@@ -128,10 +129,7 @@ const UserForm = () => {
         </div>
 
         <button
-          //   onClick={() => {
-          //     addCategory(randCategory).then(() => categoryData.refetch);
-          //   }}
-          onClick={passValues}
+          onClick={() => addUser(formValues).then((res) => res.refetch)}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >
           Submit
