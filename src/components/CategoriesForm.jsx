@@ -1,4 +1,7 @@
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import Category from './Categories/Category';
 
 const CategoriesForm = () => {
   const initialValues = {
@@ -53,30 +56,7 @@ const CategoriesForm = () => {
       >
         <h2 className="text-zinc-600 text-xl font-bold my-5 sm:my-10">Create Categories</h2>
         <div className="flex flex-col">
-          <input
-            className="input-style"
-            type="text"
-            placeholder="Category"
-            name="category"
-            value={category}
-            onChange={handleChange}
-          />
-          <input
-            className="input-style"
-            type="text"
-            placeholder="Sub-category"
-            name="subCategory"
-            value={subCategory}
-            onChange={handleChange}
-          />
-          <input
-            className="input-style"
-            type="text"
-            placeholder="Sub-sub-category"
-            name="subSubCategory"
-            value={subSubCategory}
-            onChange={handleChange}
-          />
+          <Category category={category} handleChange={handleChange} />
         </div>
 
         <button
