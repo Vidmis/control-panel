@@ -4,14 +4,60 @@
       "id": 1,
       "name": "Luigi",
       "categories": [
-        ["1", "1_1"],
-        ["2", "2_1"]
+        [
+          "1",
+          "1_1"
+        ],
+        [
+          "2",
+          "2_1"
+        ]
       ]
     },
     {
       "id": 2,
       "name": "Mario",
-      "categories": [["1", "1_1", "1_1_1"], ["2"]]
+      "categories": [
+        [
+          "1",
+          "1_1",
+          "1_1_1"
+        ],
+        [
+          "2"
+        ]
+      ]
+    },
+    {
+      "name": "privet",
+      "secondName": "asdf",
+      "email": "ber@beranku.com",
+      "password": "test",
+      "confPassword": "test",
+      "age": "20",
+      "gender": "Male",
+      "categories": [
+        [
+          "1",
+          "1_1"
+        ],
+        [
+          "2",
+          "2_1"
+        ]
+      ],
+      "id": 3
+    },
+    {
+      "name": "bandymas",
+      "secondName": "",
+      "email": "",
+      "password": "",
+      "confPassword": "",
+      "age": "",
+      "gender": "",
+      "categories": [],
+      "id": 4
     }
   ],
   "categories": [
@@ -30,6 +76,20 @@
             {
               "id": "1_1_2",
               "name": "MTB cycling"
+            }
+          ]
+        },
+        {
+          "id": "1_1",
+          "name": "Running",
+          "sub_categories": [
+            {
+              "id": "1_1_1",
+              "name": "Outside running"
+            },
+            {
+              "id": "1_1_2",
+              "name": "Inside running"
             }
           ]
         }
