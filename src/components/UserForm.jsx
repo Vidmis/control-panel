@@ -1,24 +1,20 @@
 import { useState } from 'react';
-import { useGetUsersQuery } from '../features/api';
+import { useCreateUserMutation } from '../features/api';
 import AssingModal from './AssignModal';
 
 const UserForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: users, error, isLoading } = useGetUsersQuery(1);
+  const [addUser] = useCreateUserMutation();
 
-  const initialValues = {
-    id: 1,
-    firstName: '',
+  let initialValues = {
+    name: '',
     secondName: '',
     email: '',
     password: '',
     confPassword: '',
     age: '',
     gender: '',
-    categories: [
-      ['1', '1_1'],
-      ['2', '2_1'],
-    ],
+    categories: [],
   };
 
   const [formValues, setFormValues] = useState(initialValues, (curValues, newValues) => ({
@@ -26,18 +22,15 @@ const UserForm = () => {
     ...newValues,
   }));
 
-  const { firstName, secondName, email, password, confPassword, age, gender } = formValues;
+  const { name, secondName, ymail, password, confPassword, age, gender, categories } = formValues;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormValues((values) => ({ ...values, [name]: value }));
   };
 
   const passValues = (e) => {
     e.preventDefault();
-
-    console.log(formValues);
   };
 
   return (
@@ -56,8 +49,8 @@ const UserForm = () => {
             className="input-style"
             type="text"
             placeholder="First Name"
-            name="firstName"
-            value={firstName}
+            name="name"
+            value={name}
             autoComplete="given-name"
             onChange={handleChange}
           />
@@ -75,7 +68,7 @@ const UserForm = () => {
             type="text"
             placeholder="email@gmail.com"
             name="email"
-            value={email}
+            value={ymail}
             autoComplete="email"
             onChange={handleChange}
           />
@@ -112,6 +105,7 @@ const UserForm = () => {
               name="gender"
               className="p-2 border bg-zinc-100 border-zinc-400 focus:border-blue-500 text-zinc-400 focus:text-zinc-700 rounded-md w-24"
             >
+              <option value="">-</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Uni">Uni</option>
@@ -119,32 +113,28 @@ const UserForm = () => {
 
             <input
               type="button"
-              value="Assign cattegory"
+              value="Assign category"
               onClick={() => setIsModalOpen(true)}
               className="px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-400 cursor-pointer"
             />
+            {isModalOpen && (
+              <AssingModal
+                name="categories"
+                value={categories}
+                onChange={handleChange}
+                setIsOpen={setIsModalOpen}
+              />
+            )}
           </div>
         </div>
 
         <button
-          //   onClick={() => {
-          //     addCategory(randCategory).then(() => categoryData.refetch);
-          //   }}
-          onClick={passValues}
+          onClick={() => addUser(formValues).then((res) => res.refetch)}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >
           Submit
         </button>
-        {/* <button
-          onClick={() => {
-            deleteCategory(5).then(() => categoryData.refetch);
-          }}
-        >
-          Delete
-        </button> */}
       </form>
-
-      {isModalOpen && <AssingModal setIsOpen={setIsModalOpen} />}
     </div>
   );
 };

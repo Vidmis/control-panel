@@ -1,10 +1,15 @@
-import { retry } from '@reduxjs/toolkit/dist/query';
+import { useState } from 'react';
 import { useGetCategoriesQuery } from '../features/api';
+import Select from 'react-select';
 
 const AssingModal = (props) => {
-  const { data: categories } = useGetCategoriesQuery();
+  const { data } = useGetCategoriesQuery();
+  const [category, setCategory] = useState([]);
+  const [subCat, setSubCat] = useState([]);
+  const [subSubCat, setSubSubCat] = useState([]);
 
-  console.log('categories', categories);
+  const [subList, setSubList] = useState([]);
+  const [subSubList, setSubSubList] = useState([]);
 
   const closeModal = (e) => {
     if (e.target.classList.contains('backdrop')) {
@@ -12,28 +17,28 @@ const AssingModal = (props) => {
     }
   };
 
-  const renderCategories = (categories, group = [], level = 0) => {
-    if (Array.isArray(categories)) {
-      return categories.map((category, catIndex) => {
-        const { id, name, sub_categories } = category;
+  const handleCatChange = (obj) => {
+    setCategory(obj);
+    setSubList(obj.sub_categories);
+    setSubCat(null);
+    setSubSubCat(null);
+  };
 
-        const nextGroup = level == 0 ? [id] : [...group, id];
+  const handleSubCatChange = (obj) => {
+    setSubCat(obj);
+    setSubSubList(obj.sub_categories);
+    setSubSubCat(null);
+  };
 
-        return (
-          <div key={`cat_${level}_${catIndex}_${nextGroup.join('_')}`} className="my-2 ml-2">
-            <div className="flex flex-row justify-between items-center">
-              <label htmlFor={category.name} className="flex-1 flex mr-4">
-                <p>{name}</p>
-              </label>
-              <input id={category.name} type="checkbox" className="h-7 w-7 rounded-full"></input>
-            </div>
-            {!!sub_categories && renderCategories(sub_categories, nextGroup, level + 1)}
-          </div>
-        );
-      });
-    }
+  const handleSuSubCatChange = (obj) => {
+    setSubSubCat(obj);
+  };
 
-    return null;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const assignedCat = [...props.value, [category.id, subCat.id, subSubCat.id]];
+    props.onChange({ target: { name: props.name, value: assignedCat } });
+    props.setIsOpen(false);
   };
 
   return (
@@ -42,21 +47,48 @@ const AssingModal = (props) => {
         onClick={closeModal}
         className="backdrop absolute top-0 left-0 bg-zinc-700 flex flex-col justify-center items-center bg-opacity-40 w-full h-screen mt-14"
       >
-        <div className="flex flex-row w-4/5 h-1/2 bg-zinc-700 rounded-lg items-center justify-center text-white">
-          {/* <div>
-            <ul>
-              {categories?.map((category) => (
-                <li>
-                  <label htmlFor={category.name}>{category.name}</label>
-                  <input id={category.name} type="checkbox" />
-                </li>
-              ))}
-            </ul>
-          </div> */}
-          {renderCategories(categories)}
+        <div className="w-4/5 sm:w-4/5 sm:h-1/2 relative bg-gradient-to-br from-indigo-600 to-blue-800 rounded-lg shadow-xl">
+          <button
+            className="text-white p-2 absolute top-0 right-0 bg-indigo-900 rounded-lg px-4 text-2xl font-bold"
+            onClick={() => props.setIsOpen(false)}
+          >
+            X
+          </button>
+          <div className="w-full h-full flex flex-col justify-center items-center">
+            <Select
+              options={data}
+              value={category}
+              onChange={handleCatChange}
+              getOptionLabel={(x) => x.name}
+              getOptionValue={(x) => x.name}
+              placeholder="Category"
+              className="w-64 my-4"
+            />
+            <Select
+              options={subList}
+              value={subCat}
+              onChange={handleSubCatChange}
+              getOptionLabel={(x) => x.name}
+              getOptionValue={(x) => x.name}
+              placeholder="Sub-category"
+              className="w-64 my-4"
+            />
+            <Select
+              options={subSubList}
+              value={subSubCat}
+              onChange={handleSuSubCatChange}
+              getOptionLabel={(x) => x.name}
+              getOptionValue={(x) => x.name}
+              placeholder="Sub-sub-category"
+              className="w-64 my-4"
+            />
+          </div>
         </div>
-        <button className="text-white p-2 bg-cyan-500" onClick={() => props.setIsOpen(false)}>
-          Close
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 mt-5 rounded-md text-white bg-sky-500 hover:bg-sky-400"
+        >
+          Sumbit
         </button>
       </div>
     </>

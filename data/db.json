@@ -12,6 +12,37 @@
       "id": 2,
       "name": "Mario",
       "categories": [["1", "1_1", "1_1_1"], ["2"]]
+    },
+    {
+      "name": "No name",
+      "secondName": "asdf",
+      "email": "ber@beranku.com",
+      "password": "test",
+      "confPassword": "test",
+      "age": "20",
+      "gender": "Male",
+      "categories": [
+        ["1", "1_1"],
+        ["2", "2_1"]
+      ],
+      "id": 3
+    },
+
+    {
+      "name": "Anonymous",
+      "secondName": "anon",
+      "email": "anon@nymous.com",
+      "password": "testy",
+      "confPassword": "testy",
+      "age": "41",
+      "gender": "Uni",
+      "categories": [
+        ["2", "2_1", "2_1_1"],
+        ["1", "1_1", "1_1_2"],
+        ["1", "1_2", "1_2_2"],
+        ["1", "1_1", "1_1_1"]
+      ],
+      "id": 4
     }
   ],
   "categories": [
@@ -32,6 +63,20 @@
               "name": "MTB cycling"
             }
           ]
+        },
+        {
+          "id": "1_2",
+          "name": "Running",
+          "sub_categories": [
+            {
+              "id": "1_2_1",
+              "name": "Outside running"
+            },
+            {
+              "id": "1_2_2",
+              "name": "Inside running"
+            }
+          ]
         }
       ]
     },
@@ -45,7 +90,7 @@
           "sub_categories": [
             {
               "id": "2_1_1",
-              "name": "Puodai"
+              "name": "Pots"
             },
             {
               "id": "2_1_2",
