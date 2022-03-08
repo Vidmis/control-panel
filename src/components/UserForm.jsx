@@ -114,6 +114,7 @@ const UserForm = () => {
               name="gender"
               className="p-2 border bg-zinc-100 border-zinc-400 focus:border-blue-500 text-zinc-400 focus:text-zinc-700 rounded-md w-24"
             >
+              <option value="">-</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Uni">Uni</option>

@@ -26,7 +26,7 @@ const initialValues = {
 };
 
 const CategoriesForm = () => {
-  const [openCat, setOpenCat] = useState(false);
+  const [openCat, setOpenCat] = useState(true);
   const [openSub, setOpenSub] = useState(false);
   const [openSubSub, setOpenSuSub] = useState(false);
   const [addCategory, addedCategoryResult] = useCreateCategoryMutation();
@@ -50,19 +50,19 @@ const CategoriesForm = () => {
   };
 
   const onClickOpenCat = () => {
-    setOpenCat(!openCat);
+    setOpenCat(true);
     setOpenSub(false);
     setOpenSuSub(false);
   };
   const onClickOpenSub = () => {
     setOpenCat(false);
-    setOpenSub(!openSub);
+    setOpenSub(true);
     setOpenSuSub(false);
   };
   const onClickOpenSubSub = () => {
     setOpenCat(false);
     setOpenSub(false);
-    setOpenSuSub(!openSubSub);
+    setOpenSuSub(true);
   };
 
   console.log('addedCategoryResult', addedCategoryResult);
@@ -79,18 +79,24 @@ const CategoriesForm = () => {
       >
         <h2 className="text-zinc-600 text-xl font-bold my-5 sm:my-10">Create Categories</h2>
         <div className="flex flex-col">
-          <div className="flex flex-col items-start">
-            <button className="p-2 mb-2 bg-blue-400 rounded-md text-white" onClick={onClickOpenCat}>
-              Create Cateogry
-            </button>
-            <button className="p-2 mb-2 bg-blue-500 rounded-md text-white" onClick={onClickOpenSub}>
-              Create Sub-category
+          <div className="flex flex-row items-start">
+            <button
+              className="p-2 mb-2 w-24 mx-1 bg-blue-400 rounded-md text-white"
+              onClick={onClickOpenCat}
+            >
+              Category
             </button>
             <button
-              className="p-2 mb-2 bg-blue-600 rounded-md text-white"
+              className="p-2 mb-2 w-24 mx-1 bg-blue-500 rounded-md text-white"
+              onClick={onClickOpenSub}
+            >
+              Sub
+            </button>
+            <button
+              className="p-2 mb-2 w-24 mx-1 bg-blue-600 rounded-md text-white"
               onClick={onClickOpenSubSub}
             >
-              Create Sub-sub-cateogry
+              Sub-sub
             </button>
           </div>
         </div>

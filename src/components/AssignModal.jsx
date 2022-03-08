@@ -1,10 +1,10 @@
 import { retry } from '@reduxjs/toolkit/dist/query';
+import { useEffect, useState } from 'react';
 import { useGetCategoriesQuery } from '../features/api';
 
 const AssingModal = (props) => {
   const { data: categories } = useGetCategoriesQuery();
-
-  console.log('categories', categories);
+  const [level, setLevel] = useState([]);
 
   const closeModal = (e) => {
     if (e.target.classList.contains('backdrop')) {
@@ -12,12 +12,26 @@ const AssingModal = (props) => {
     }
   };
 
+  const handleClick = (group) => {
+    setLevel(group);
+  };
+
+  const handleSubmit = () => {
+    props.setIsOpen(false);
+  };
+
+  useEffect(() => {
+    console.log('level', level);
+  }, [level]);
+
   const renderCategories = (categories, group = [], level = 0) => {
     if (Array.isArray(categories)) {
       return categories.map((category, catIndex) => {
         const { id, name, sub_categories } = category;
 
         const nextGroup = level == 0 ? [id] : [...group, id];
+
+        // console.log(nextGroup);
 
         return (
           <div
@@ -28,7 +42,12 @@ const AssingModal = (props) => {
               <label htmlFor={category.name} className="flex-1 flex mr-4 border-l-2 pl-2">
                 <p>{name}</p>
               </label>
-              <input id={category.name} type="checkbox" className="h-4 w-4 rounded-full"></input>
+              <input
+                onChange={() => handleClick(catIndex)}
+                id={category.name}
+                type="checkbox"
+                className="h-4 w-4 rounded-full"
+              ></input>
             </div>
             {!!sub_categories && renderCategories(sub_categories, nextGroup, level + 1)}
           </div>
@@ -43,7 +62,7 @@ const AssingModal = (props) => {
     <>
       <div
         onClick={closeModal}
-        className="backdrop absolute top-0 left-0 bg-zinc-700 flex justify-center items-center bg-opacity-40 w-full h-screen mt-14"
+        className="backdrop absolute top-0 left-0 bg-zinc-700 flex flex-col justify-center items-center bg-opacity-40 w-full h-screen mt-14"
       >
         <div className="w-4/5 sm:w-4/5 sm:h-1/2 relative bg-gradient-to-br from-indigo-600 to-blue-800 rounded-lg shadow-xl text-white">
           <button
@@ -56,6 +75,12 @@ const AssingModal = (props) => {
             {renderCategories(categories)}
           </div>
         </div>
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 mt-5 rounded-md text-white bg-sky-500 hover:bg-sky-400"
+        >
+          Sumbit
+        </button>
       </div>
     </>
   );
