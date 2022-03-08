@@ -1,6 +1,3 @@
-import { faAdd, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 const SubSubCateogry = ({ subSubCatVal, handleChange }) => {
   return (
     <div className="flex justify-center items-center">

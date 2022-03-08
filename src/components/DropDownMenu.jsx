@@ -1,17 +1,30 @@
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useGetCategoriesQuery } from '../features/api';
 
 const DropDownMenu = () => {
-  const { data: categories } = useGetCategoriesQuery();
   const [expanded, setExpanded] = useState({});
 
-  const onExpandPress = (parentID, isExpanded, level) => {
-    setExpanded((currentState) => ({
-      ...currentState,
-      [parentID]: isExpanded ? level : level + 1,
-    }));
+  const { data: categories } = useGetCategoriesQuery();
+
+  const onExpandPress = (parentID, id, level) => {
+    setExpanded((currentState) => {
+      const currentExpanded = [...(currentState[parentID] || [])];
+
+      if (currentExpanded.includes(id)) {
+        if (level === 0) {
+          return { ...currentState, [parentID]: [] };
+        }
+        return {
+          ...currentState,
+          [parentID]: currentExpanded.filter((expandedID) => expandedID !== id),
+        };
+      }
+
+      return { ...currentState, [parentID]: [...currentExpanded, id] };
+    });
   };
 
   const renderCategories = (categories, group = [], level = 0) => {
@@ -21,18 +34,18 @@ const DropDownMenu = () => {
 
         const nextGroup = level == 0 ? [id] : [...group, id];
         const parentID = nextGroup[0];
-        const isExpanded = expanded[parentID] > level;
+        const isExpanded = Array.isArray(expanded[parentID]) && expanded[parentID].includes(id);
 
         return (
           <div key={`cat_${level}_${catIndex}_${nextGroup.join('_')}`} className="my-2 ml-2">
             <div className="flex flex-row justify-between items-center">
-              <a href={`/category/${nextGroup.join('/')}`} className="flex-1 flex mr-4">
+              <Link to={`/category/${nextGroup.join('/')}`} className="flex-1 flex mr-4">
                 <p>{name}</p>
-              </a>
+              </Link>
               <span className="h-7 w-7 rounded-full">
                 {!!sub_categories && (
                   <span
-                    onClick={() => onExpandPress(parentID, isExpanded, level)}
+                    onClick={() => onExpandPress(parentID, id, level)}
                     className="flex justify-center items-center bg-sky-900 h-full w-full rounded-full cursor-pointer"
                   >
                     <FontAwesomeIcon icon={isExpanded ? faAngleUp : faAngleDown} />

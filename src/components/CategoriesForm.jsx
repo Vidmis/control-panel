@@ -29,7 +29,7 @@ const CategoriesForm = () => {
   const [openCat, setOpenCat] = useState(true);
   const [openSub, setOpenSub] = useState(false);
   const [openSubSub, setOpenSuSub] = useState(false);
-  const [addCategory, addedCategoryResult] = useCreateCategoryMutation();
+  const [addCategory] = useCreateCategoryMutation();
   const [formValues, setFormValues] = useState(initialValues, (curValues, newValues) => ({
     ...curValues,
     ...newValues,
@@ -39,14 +39,7 @@ const CategoriesForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormValues((values) => ({ ...values, [name]: value }));
-  };
-
-  const passValues = (e) => {
-    e.preventDefault();
-
-    console.log('formValues', formValues);
   };
 
   const onClickOpenCat = () => {
@@ -65,18 +58,12 @@ const CategoriesForm = () => {
     setOpenSuSub(true);
   };
 
-  console.log('addedCategoryResult', addedCategoryResult);
-
   return (
     <div className="flex flex-row h-fit ">
       <div className="h-fit hidden sm:block sm:w-1/2">
         <img className="w-full h-screen right-36" src="../../public/images/formwallpaper.png" />
       </div>
-      <form
-        type="submit"
-        onSubmit={passValues}
-        className="flex flex-col items-center w-full sm:w-1/2"
-      >
+      <form type="submit" className="flex flex-col items-center w-full sm:w-1/2">
         <h2 className="text-zinc-600 text-xl font-bold my-5 sm:my-10">Create Categories</h2>
         <div className="flex flex-col">
           <div className="flex flex-row items-start">
@@ -112,13 +99,6 @@ const CategoriesForm = () => {
         >
           Submit
         </button>
-        {/* <button
-          onClick={() => {
-            deleteCategory(5).then(() => categoryData.refetch);
-          }}
-        >
-          Delete
-        </button> */}
       </form>
     </div>
   );

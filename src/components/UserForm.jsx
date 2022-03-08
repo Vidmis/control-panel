@@ -1,14 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useCreateUserMutation, useGetUsersQuery } from '../features/api';
+import { useState } from 'react';
+import { useCreateUserMutation } from '../features/api';
 import AssingModal from './AssignModal';
 
 const UserForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const { data: users, error, isLoading } = useGetUsersQuery(1);
-  const [addUser, addedUserRes] = useCreateUserMutation();
-  const [catAssignValues, setCatAssignValues] = useState([]);
-
-  // console.log('catAssignValues', catAssignValues);
+  const [addUser] = useCreateUserMutation();
 
   let initialValues = {
     name: '',
@@ -20,10 +16,6 @@ const UserForm = () => {
     gender: '',
     categories: [],
   };
-
-  useEffect(() => {
-    console.log(initialValues.categories);
-  }, [catAssignValues]);
 
   const [formValues, setFormValues] = useState(initialValues, (curValues, newValues) => ({
     ...curValues,
@@ -137,18 +129,11 @@ const UserForm = () => {
         </div>
 
         <button
-          onClick={() => console.log('formValues', formValues)}
+          onClick={() => addUser(formValues).then((res) => res.refetch)}
           className="px-4 py-2 mt-10 rounded-md text-white bg-sky-500 hover:bg-sky-400"
         >
           Submit
         </button>
-        {/* <button
-          onClick={() => {
-            deleteCategory(5).then(() => categoryData.refetch);
-          }}
-        >
-          Delete
-        </button> */}
       </form>
     </div>
   );

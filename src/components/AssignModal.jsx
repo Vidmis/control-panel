@@ -17,25 +17,8 @@ const AssingModal = (props) => {
     }
   };
 
-  const checkIds = (id) => {
-    // if (props.value.includes(id)) {
-    //   props.setCatAssignValues(value.filter((item) => item !== id));
-    // } else {
-    //   props.setCatAssignValues([...props.value, id]);
-    // }
-    const catIds = (() => {
-      if (props.value.includes(id)) {
-        return props.value.filter((item) => item !== id);
-      }
-      return [...props.value, id];
-    })();
-
-    props.onChange({ target: { name: props.name, value: catIds } });
-  };
-
   const handleCatChange = (obj) => {
     setCategory(obj);
-    checkIds(obj.id);
     setSubList(obj.sub_categories);
     setSubCat(null);
     setSubSubCat(null);
@@ -43,18 +26,18 @@ const AssingModal = (props) => {
 
   const handleSubCatChange = (obj) => {
     setSubCat(obj);
-    checkIds(obj.id);
     setSubSubList(obj.sub_categories);
     setSubSubCat(null);
   };
 
   const handleSuSubCatChange = (obj) => {
     setSubSubCat(obj);
-    checkIds(obj.id);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const assignedCat = [...props.value, [category.id, subCat.id, subSubCat.id]];
+    props.onChange({ target: { name: props.name, value: assignedCat } });
     props.setIsOpen(false);
   };
 
